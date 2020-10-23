@@ -3,8 +3,37 @@ import '../css/App.css';
 import AddAppointments from './AddAppointments.js';
 import ListAppointments from './ListAppointments.js';
 import SearchAppointments from './SearchAppointments.js';
+import { without } from 'lodash';
 
 class App extends Component{
+
+  constructor(props){
+		super(props);
+		this.state = {
+			myAppointment : []
+		};
+    this.deleteAppointment = (apt) => {
+      let tempApts = this.state.myAppointment;
+      tempApts = without(tempApts, apt);
+      this.setState({
+        myAppointment : tempApts
+      })
+    }
+	}
+
+	componentDidMount(){
+		fetch('./data.json')
+		.then(response => response.json())
+		.then(result => {
+			const apts = result.map( item => {
+				return item;
+			});
+			this.setState({
+				myAppointment : apts
+			})
+		});
+	}
+
   render(){
     return(
       <main className="page bg-white" id="petratings">
@@ -14,7 +43,10 @@ class App extends Component{
               <div className="container">
                 <AddAppointments />
                 <SearchAppointments />
-                <ListAppointments />
+                <ListAppointments
+                  appointments={ this.state.myAppointment  }
+                  deleteAppointment={ this.deleteAppointment }
+                  />
               </div>
             </div>
           </div>
