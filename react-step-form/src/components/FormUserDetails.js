@@ -11,6 +11,7 @@ class FormUserDetails extends Component{
     this.continue = this.continue.bind(this);
   }
 
+  // to go to the next form
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
@@ -21,20 +22,20 @@ class FormUserDetails extends Component{
 
     return(
       <MuiThemeProvider>
-        <>
+        <React.Fragment>
           <AppBar title="Enter user details" />
           <TextField
             hintText="Enter your first name"
             floatingLabelText="First name"
             onChange={ handleChange('firstName') }
-            defaultValue={ values.firstname }
+            defaultValue={ values.firstName }
           />
           <br />
           <TextField
             hintText="Enter your last name"
             floatingLabelText="Last name"
             onChange={ handleChange('lastName') }
-            defaultValue={ values.lastname }
+            defaultValue={ values.lastName }
           />
           <br />
           <TextField
@@ -44,13 +45,14 @@ class FormUserDetails extends Component{
             defaultValue={ values.email }
           />
           <br />
+          <br />
           <RaisedButton
             label="Continue"
             primary={true}
             style={ styles.button }
             onClick={ this.continue }
           />
-        </>
+      </React.Fragment>
       </MuiThemeProvider>
     );
   }
