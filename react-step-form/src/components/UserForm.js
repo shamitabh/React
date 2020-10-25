@@ -22,19 +22,19 @@ class UserForm extends Component{
   // method to proceed to the next step
   nextStep = () => {
     this.setState({
-      step : this.step+1
+      step : this.state.step+1
     });
   }
 
   // method to go back to the previous step
   prevStep = () => {
     this.setState({
-      step : this.step-1
+      step : this.state.step-1
     });
   }
 
   // handle field changes
-  handleChange = (input, e) => {
+  handleChange = (input) => (e) => {
     this.setState({
       [input] : e.target.value
     });
@@ -46,11 +46,11 @@ class UserForm extends Component{
 
     switch(step){
       case 1:
-        return (
+        return(
           <FormUserDetails
-            nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            values={values}
+            nextStep={ this.nextStep }
+            handleChange={ this.handleChange }
+            values={ values }
           />
         );
       case 2:
@@ -65,6 +65,10 @@ class UserForm extends Component{
           return(
             <h1>Success</h1>
           );
+      default:
+        return(
+          <h1>Kuch gadbadi hua boss</h1>
+        );
     }
   }
 }
